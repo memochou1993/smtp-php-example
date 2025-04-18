@@ -22,6 +22,7 @@ function sendExampleEmail(string $to, string $subject, string $body): bool
         $mail->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
         $mail->addAddress($to);
         $mail->Subject = $subject;
+        $mail->isHTML(true);
         $mail->Body = $body;
         $mail->send();
         return true;
@@ -33,7 +34,7 @@ function sendExampleEmail(string $to, string $subject, string $body): bool
 
 $to = 'memochou1993@gmail.com';
 $subject = 'This is an example email';
-$body = 'Hello, this is the body of the email.';
+$body = '<html><body><h1>Hello, this is an <b>HTML</b> email!</h1><p>This is the body of the email in HTML format.</p></body></html>';
 
 if (sendExampleEmail($to, $subject, $body)) {
     echo "Email sent successfully.";
